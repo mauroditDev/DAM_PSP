@@ -1,0 +1,38 @@
+package practica_4;
+
+public class Triangulo implements Poligono {
+
+	private double altura;
+	private double base;
+	
+	@Override
+	public double calcularArea() {
+		
+		return this.getBase() * this.getAltura() / 2;
+		
+	}
+	
+	@Override
+	public String toString(){
+		return "Triangulo de lado: "+ this.getBase() +
+				" de altura: " + this.getAltura() + 
+				"\n\tcon area: " + this.calcularArea();
+	}
+
+	public double getAltura() {
+		return altura;
+	}
+
+	public void setAltura(double altura) {
+		this.altura = altura;
+	}
+
+	public double getBase() {
+		return base;
+	}
+
+	public void setBase(double base) {
+		this.base = base;
+	}
+
+}

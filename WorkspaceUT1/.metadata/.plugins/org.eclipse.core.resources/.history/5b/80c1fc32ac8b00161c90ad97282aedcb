@@ -1,0 +1,28 @@
+package ut1p3;
+import java.io.*;
+
+public class Ut1p3 {
+	public static void main(String[] args) {
+	
+		if (args.length <= 0) {
+	
+			System.err.println("Se necesita un programa a ejecutar");
+	
+			System.exit(-1);
+		}
+		
+		Runtime runtime = Runtime.getRuntime();
+		
+		try {
+			Process proceso	= runtime.exec(args);
+			System.out.println(proceso.toString());
+			proceso.destroy();
+			System.out.println(proceso.exitValue());
+		}catch(IOException ex){
+			System.err.println("Excepción de E/S!!");
+			System.exit(-1);
+		}
+		
+	}
+	
+}
