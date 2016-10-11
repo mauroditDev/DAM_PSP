@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;ut1p4.Ut1p4&apos; to &apos;Ut1p4_1&apos;&#x0A;- Original project: &apos;Ut1-p4&apos;&#x0A;- Original element: &apos;ut1p4.Ut1p4&apos;&#x0A;- Renamed element: &apos;ut1p4.Ut1p4_1&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Ut1p4&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;ut1p4{Ut1p4.java[Ut1p4" matchStrategy="1" name="Ut1p4_1" qualified="false" references="true" similarDeclarations="false" stamp="1476186543856" textual="false" version="1.0"/>
+</session>
