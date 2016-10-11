@@ -1,0 +1,27 @@
+package ut1p3;
+
+public class ut1p3CreaCarpeta {
+
+	public static void main(String[] args){
+		
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process proceso	= runtime.exec("mkdir prueba");
+			Process proceso2 = runtime.exec("fireforx http://www.netacad.com");
+			Process proceso3 = runtime.exec("thunar");
+			try{
+				Thread.sleep(5000);
+			}catch(Exception e){
+				
+			}
+			proceso.destroy();
+			proceso2.destroy();
+			proceso3.destroy();
+		}catch(Exception ex){
+			System.err.println(ex.getMessage());
+			System.exit(-1);
+		}
+		
+	}
+	
+}

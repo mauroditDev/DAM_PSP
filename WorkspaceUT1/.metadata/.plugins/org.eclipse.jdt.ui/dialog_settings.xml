@@ -15,12 +15,13 @@
 	<section name="JavaElementSearchActions">
 	</section>
 	<section name="FatJarPackageWizard">
-		<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p3.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
-		<item value="Ut1p3 - Ut1-p3" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p3-creaCar.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="ut1p3CreaCarpeta - Ut1-p3" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
 		<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p3-creaCar.jar"/>
 			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p3.jar"/>
 			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p2.jar"/>
 		</list>
