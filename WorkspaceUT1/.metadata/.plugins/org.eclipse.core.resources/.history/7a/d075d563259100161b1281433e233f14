@@ -10,7 +10,7 @@ public static void main(String[] args){
 		
 		Runtime runtime = Runtime.getRuntime();
 		try{
-			Process proceso = runtime.exec("iconv --huyh");
+			Process proceso = runtime.exec("cd asdaasghadfadgsf/asdfasdf/a");
 			InputStream is = proceso.getErrorStream();
 			
 			int exitVal;
