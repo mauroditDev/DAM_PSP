@@ -1,0 +1,45 @@
+package ut1p5;
+
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
+public class ProgramaMultiproceso {
+	
+	public static void main(String[] args){
+		
+			Runtime runtime = Runtime.getRuntime();
+			try{
+				Process proceso = runtime.exec("ls -la");
+				InputStream is = proceso.getInputStream();
+				
+				try{
+					proceso.waitFor();
+				} catch(InterruptedException e) {
+					e.toString();
+				}
+				
+				Process proceso2 = runtime.exec("tr 'd' 'D'");
+				OutputStream os = proceso2.getOutputStream();
+				
+				BufferedReader br = new BufferedReader(new InputStreamReader (is));
+				while(true){
+					String a = br.readLine();
+					os.write(a.getBytes());
+					if(a==null)
+						break;
+				}
+				
+					
+			}catch(Exception ex){
+			
+			}
+		
+	}
+		
+}
+
+
