@@ -3,6 +3,13 @@ package ut0p7;
 public class Paciente {
 
 	private String nombre;
+	private String apellido;
+	
+	public Paciente(String n, String a){
+		this.nombre = n;
+		this.apellido = a;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -14,12 +21,6 @@ public class Paciente {
 	}
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
-	}
-	private String apellido;
-	
-	public Paciente(String n, String a){
-		this.nombre = n;
-		this.apellido = a;
 	}
 	
 }

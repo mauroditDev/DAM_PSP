@@ -10,10 +10,10 @@ public class Ut0p7 {
 		Archivador archivador = new Archivador();
 		
 		for(int i = 0; i<5;i++){
-			System.out.println("escribe nombre y apellido separado por un espacion");
-			String aux = sc.next();
-			String[] a = aux.split(" ");
-			archivador.guardar(new Paciente(a[0],a[1]));
+			String a1 = "nombre "+i;
+			String a2 ="apellido "+i;
+			Paciente a = new Paciente(a1,a2);
+			archivador.guardar(a);
 		}
 		
 		sc.close();

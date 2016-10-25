@@ -1,0 +1,12 @@
+package ut2p1;
+
+public class Ejecutable {
+
+	public static void main(String[] args){
+		HiloFor t1 = new HiloFor();
+		t1.start();
+		for(int i = 0; i< 10; i++)
+			System.out.println("Estoy fuera del hilo");
+	}
+	
+}

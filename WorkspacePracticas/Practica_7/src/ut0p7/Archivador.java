@@ -6,6 +6,10 @@ public class Archivador {
 
 	private ArrayList<Paciente> listado;
 	
+	public Archivador(){
+		listado = new ArrayList<Paciente>();
+	}
+	
 	public void guardar(Paciente p){
 		listado.add(p);
 	}

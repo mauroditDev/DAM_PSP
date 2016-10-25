@@ -1,0 +1,10 @@
+package ut2p1;
+
+public class Ejecutable {
+
+	public static void main(String[] args){
+		HiloFor t1 = new HiloFor();
+		t1.start();
+	}
+	
+}
