@@ -7,12 +7,27 @@ public class HiloReloj {
 
 				HiloTic tic = new HiloTic();
 				HiloTac tac = new HiloTac();
+				
 				tic.start();
-				Thread.sleep(1000);
+				synchronized(tic){
+					tic.wait();
+				}
+				synchronized(tic){
+					tic.notify();
+				}
+				
 				tac.start();
-				Thread.sleep(1000);
+				synchronized(tac){
+					tac.wait();
+				}
+				synchronized(tac){
+					tac.notify();
+				}
+				
 			}
-		}catch(Exception e){}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 }

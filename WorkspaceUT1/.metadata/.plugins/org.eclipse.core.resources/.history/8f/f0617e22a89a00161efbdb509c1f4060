@@ -1,6 +1,0 @@
-package ut2p1;
-
-public class HiloC extends Thread{
-
-	
-}
