@@ -1,0 +1,25 @@
+package ut2p8;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int[] tabla = new int[1000000];
+		int posicion = (int) (Math.random() * 1000000);
+		for(int i=0;i<tabla.length;i++) {
+			if(i==posicion)
+				tabla[i]=1;
+			else
+				tabla[i]=0;
+		}
+		
+		Buscador b1 = new Buscador();
+		b1.nombre= "Bus1";
+		b1.lista = tabla;
+		Thread t1 = new Thread(b1);
+		
+	}
+
+}

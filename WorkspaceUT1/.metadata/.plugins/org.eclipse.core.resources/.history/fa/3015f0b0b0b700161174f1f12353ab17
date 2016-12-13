@@ -1,0 +1,10 @@
+package ut2p8;
+
+public class Ganador implements Runnable {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+}

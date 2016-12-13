@@ -1,0 +1,36 @@
+package ut2p8;
+
+public class Buscador implements Runnable {
+	public int[] lista;
+	private int posicion;
+	private int sentido;
+	public String nombre;
+	
+	public Buscador(){
+		posicion = (int) (Math.random() * 1000000);
+	}
+	
+	@Override
+	public void run() {
+		while(!buscar());
+		System.out.println("encontrado por "+nombre);
+	}
+	
+	public synchronized boolean buscar(){
+		int posicionIn = posicion;
+		if(lista[posicion]==1){
+			return true;
+		}
+		else{
+			if(posicion<lista.length-1&&posicion<1){
+				posicion+=sentido;
+			}
+			else{
+				posicion = posicionIn;
+				sentido = sentido * -1;
+			}
+		}
+		return false;
+	}
+
+}

@@ -1,0 +1,55 @@
+package ut2p8;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int[] tabla = new int[1000000];
+		int posicion = (int) (Math.random() * 1000000);
+		for(int i=0;i<tabla.length;i++) {
+			if(i==posicion)
+				tabla[i]=1;
+			else
+				tabla[i]=0;
+		}
+		
+		Buscador b1 = new Buscador();
+		b1.nombre= "Bus1";
+		b1.lista = tabla;
+		Thread t1 = new Thread(b1);
+		
+		Buscador b2 = new Buscador();
+		b2.nombre= "Bus2";
+		b2.lista = tabla;
+		Thread t2 = new Thread(b2);
+		
+		Buscador b3 = new Buscador();
+		b3.nombre= "Bus3";
+		b3.lista = tabla;
+		Thread t3 = new Thread(b3);
+		
+		try{
+			t1.start();
+			t2.start();
+			t3.start();
+			Thread.sleep(1000);
+			if(t1.isAlive()){
+				t1.stop();
+			}
+			if(t2.isAlive()){
+				t2.stop();
+			}
+			if(t3.isAlive()){
+				t3.stop();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	static String ganador;
+
+}
