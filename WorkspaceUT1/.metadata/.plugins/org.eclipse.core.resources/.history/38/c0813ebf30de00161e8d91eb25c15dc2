@@ -1,0 +1,31 @@
+package sockets_01;
+
+import java.io.*;
+import java.net.*;
+public class Servidor{
+	public static void main(String[] args) throws IOException {
+		int nPuerto = 5000; //puerto local
+		ServerSocket servidor = null;
+		Socket clienteConectado = null;
+		servidor = new ServerSocket (nPuerto);
+		System.out.println("Esperando al cliente....");
+		clienteConectado = servidor.accept(); 
+		InputStream entrada = null;
+		entrada = clienteConectado.getInputStream(); 
+		DataInputStream flujoEntrada = new DataInputStream (entrada); 
+		OutputStream salida = null;
+		salida = clienteConectado.getOutputStream();
+		DataOutputStream flujoSalida = new DataOutputStream (salida);
+		while(!clienteConectado.isClosed()){
+			try{flujoSalida.writeUTF(flujoEntrada.readUTF());}
+			catch(java.io.EOFException e){}
+		}
+		
+		entrada.close();
+		flujoEntrada.close();
+		salida.close();
+		flujoSalida.close();
+		clienteConectado.close();
+		servidor.close();
+	}
+}

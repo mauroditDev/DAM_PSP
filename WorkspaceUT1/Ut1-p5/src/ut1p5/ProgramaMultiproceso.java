@@ -18,7 +18,7 @@ public class ProgramaMultiproceso {
 				
 				proceso.waitFor();
 				
-				Process proceso2 = runtime.exec("tr 'd' 'D'");
+				Process proceso2 = runtime.exec("tr '[:alnum:]' 'd ");
 				OutputStream os = proceso2.getOutputStream();
 				
 				BufferedReader br = new BufferedReader(new InputStreamReader (is));

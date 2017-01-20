@@ -1,0 +1,16 @@
+package carrera;
+
+import java.util.ArrayList;
+
+public class Carrera {
+
+	public static void main(String[] args) {
+		ArrayList<Corredor> participantes = new ArrayList<Corredor>();
+		for(int i = 0; i<5; i++){
+			Corredor aux = new Corredor("corr" + String.valueOf(i));
+			participantes.add(aux);
+		}
+		
+	}
+
+}

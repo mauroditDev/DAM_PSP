@@ -1,0 +1,19 @@
+package sockets_01;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+
+public class Aceptador implements Runnable{
+	public ServerSocket servidor;
+	@Override
+	public void run() {
+		while(true){
+			try {
+				servidor.accept();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}

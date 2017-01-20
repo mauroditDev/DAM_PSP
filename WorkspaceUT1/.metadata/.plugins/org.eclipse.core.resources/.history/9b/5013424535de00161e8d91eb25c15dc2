@@ -1,0 +1,27 @@
+package sockets_01;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+
+public class Aceptador implements Runnable{
+	public ServerSocket servidor;
+	public static ArrayList<Socket> clientes;
+	
+	public Aceptador(ServerSocket s){
+		servidor = s;
+	}
+	
+	@Override
+	public void run() {
+		while(true){
+			try {
+				clientes.add(servidor.accept());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}

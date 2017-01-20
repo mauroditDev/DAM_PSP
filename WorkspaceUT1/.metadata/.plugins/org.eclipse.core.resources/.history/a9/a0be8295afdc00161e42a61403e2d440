@@ -1,0 +1,34 @@
+package carrera;
+
+import java.util.ArrayList;
+
+public class Carrera {
+
+	public static void main(String[] args) {
+		try {
+			ArrayList<Corredor> participantes = new ArrayList<Corredor>();
+			for(int i = 0; i<5; i++){
+				Corredor aux = new Corredor("corr" + String.valueOf(i));
+				participantes.add(aux);
+			}
+			for(Corredor a: participantes){
+				a.start();
+			}
+			boolean cont = true;
+			while(cont){
+				cont = false;
+				for(Corredor a: participantes){
+					if(a.posicion<100){
+						a.start();
+						a.join();
+						cont = true;
+					}
+				}
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+
+}

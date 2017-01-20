@@ -14,12 +14,13 @@
 		<item value="1|Sans|10.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="FatJarPackageWizard">
-		<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/DentroFuerajar.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
-		<item value="DentroFuera - Ut2-p1" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/Cliente.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="Cliente - Ut3-p1" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
 		<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/Cliente.jar"/>
 			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/DentroFuerajar.jar"/>
 			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p3-creaCar.jar"/>
 			<item value="/media/Datos/Datos_Mauro/PSP/WorkspaceUT1/ut1p3.jar"/>
@@ -76,7 +77,7 @@
 	</section>
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
-		<item value="true" key="create_main"/>
+		<item value="false" key="create_main"/>
 		<item value="true" key="create_unimplemented"/>
 	</section>
 	<section name="RenameInformationPopup">
