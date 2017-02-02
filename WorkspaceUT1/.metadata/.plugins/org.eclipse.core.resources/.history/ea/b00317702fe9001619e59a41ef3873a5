@@ -1,0 +1,65 @@
+package sockets;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Lector implements Runnable{
+	private Socket clienteConectado;
+	private InputStream entrada;
+	private DataInputStream flujoEntrada;
+	private OutputStream salida;
+	private DataOutputStream flujoSalida;
+	
+	public Lector(Socket s){
+		clienteConectado = s;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			entrada = clienteConectado.getInputStream(); 
+			flujoEntrada = new DataInputStream (entrada);
+			salida = clienteConectado.getOutputStream();
+			flujoSalida = new DataOutputStream (salida);
+			System.out.println("nuevo lector");
+			while(clienteConectado.isConnected()){
+				String mensaje = "";
+				try{mensaje = flujoEntrada.readUTF();}catch(EOFException e){}
+				if(mensaje.trim().equals("0")){
+					try{
+						flujoSalida.writeUTF("Bienvenido cliente n."+Servidor.cliente+"\n" +
+							"por favor introduzca su nombre de usuario:");
+						Servidor.cliente++;
+					}
+					catch(java.io.EOFException e){}
+				}
+				else{
+				//if(mensaje.charAt(0) == '1'){
+					String user = mensaje;
+					try{
+						int pass = (int)(Math.random()*10000);
+						flujoSalida.writeUTF("La contraseña asignada al usuario "+user+" es: "+pass);
+						clienteConectado.close();
+						PrintWriter pw = new PrintWriter(new FileWriter("./pass.data",true));
+						pw.write(user+":"+pass+"\n");
+						pw.close();
+					}
+					catch(java.io.EOFException e){}
+				}
+				
+			}
+			entrada.close();
+			flujoEntrada.close();
+			salida.close();
+		} catch (Exception e) {
+			//e.printStackTrace();
+		}
+	}
+
+}
