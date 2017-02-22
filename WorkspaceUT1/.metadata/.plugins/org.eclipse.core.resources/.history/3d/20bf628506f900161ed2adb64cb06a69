@@ -1,0 +1,165 @@
+package chat;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.net.Socket;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+import javax.swing.JSeparator;
+
+public class ClienteUI extends JFrame {
+
+	private JPanel contentPane;
+	Socket socket;
+	private JTextArea textArea;
+	private DataOutputStream dos;
+	private JTextField textField;
+	private String usuario;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ClienteUI frame = new ClienteUI();
+					frame.setVisible(true);
+					//frame.escuchar();
+					frame.recibirMensajesServidor();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ClienteUI() {
+		usuario = null;
+		try{
+			socket = new Socket("localhost",1555);
+			usuario = String.valueOf((int)(Math.random()*999));
+			System.out.println("cliente conectado con éxito: " + usuario);
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Excepción fatal:",
+			        JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 504, 485);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		System.out.println("patata");
+		
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					dos = new DataOutputStream(socket.getOutputStream());
+					dos.writeUTF(usuario + ": " + textField.getText() );
+				}
+				catch(Exception exc){
+					JOptionPane.showMessageDialog(new JFrame(), exc.getMessage(), "Excepción fatal:",
+					        JOptionPane.ERROR_MESSAGE);
+					exc.printStackTrace();
+				}
+			}
+		});
+		
+		System.out.println("patata");
+		btnEnviar.setBounds(389, 386, 89, 49);
+		contentPane.add(btnEnviar);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 386, 369, 47);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		
+		System.out.println("patata");
+		textArea = new JTextArea();
+		textArea.setBounds(10, 11, 468, 351);
+		contentPane.add(textArea);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 373, 468, 13);
+		contentPane.add(separator);
+		System.out.println("patata");
+		
+	}
+	
+	public void recibirMensajesServidor(){
+        // Obtiene el flujo de entrada del socket
+		System.out.println("patata2");
+        DataInputStream entradaDatos = null;
+        String mensaje;
+        try {
+            entradaDatos = new DataInputStream(socket.getInputStream());
+            System.out.println("patata2");
+        }catch (IOException ex) {
+        	System.out.println("Error al crear el stream de entrada: " + ex.getMessage());
+        } catch (NullPointerException ex) {
+        	System.out.println("El socket no se creo correctamente. ");
+        }
+        System.out.println("patata2");
+        // Bucle infinito que recibe mensajes del servidor
+        boolean conectado = true;
+        while (conectado) {
+            try {
+            	System.out.println("patata3");
+                mensaje = entradaDatos.readUTF();
+                System.out.println("patata3");
+                textArea.append(mensaje + System.lineSeparator());
+                System.out.println("patata3");
+            } catch (EOFException ex){
+            	conectado = false;
+            }  catch (IOException ex) {
+                System.out.println("Error al leer del stream de entrada: " + ex.getMessage());
+                conectado = false;
+            } catch (NullPointerException ex) {
+            	System.out.println("El socket no se creo correctamente. ");
+                conectado = false;
+            }
+        }
+    }
+	
+	public void escuchar(){
+       
+        try {
+        	 DataInputStream dis = null;
+             String mensaje;
+            dis = new DataInputStream(socket.getInputStream());
+            while (true) {
+            	mensaje = dis.readUTF();
+				textArea.append(mensaje + System.lineSeparator());
+            }
+            
+        } catch (Exception ex) {
+        	JOptionPane.showConfirmDialog( this, "Error en stream de entrada: " + ex.getMessage(),
+            		"ERROR", JOptionPane.ERROR_MESSAGE );
+            ex.printStackTrace();
+        }
+
+    }
+}

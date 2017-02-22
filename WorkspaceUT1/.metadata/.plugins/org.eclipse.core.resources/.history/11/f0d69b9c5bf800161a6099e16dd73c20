@@ -1,0 +1,22 @@
+package chat;
+
+import java.net.Socket;
+
+public class Cliente implements Runnable{
+	Socket socket;
+	ChatMsg chatMsg;
+	
+	public Cliente(Socket sock, ChatMsg chatMsg){
+		this.socket = sock;
+		this.chatMsg = chatMsg;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+}

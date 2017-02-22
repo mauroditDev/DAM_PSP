@@ -1,0 +1,111 @@
+package chat;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
+
+public class ClienteUI extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	Socket socket;
+	private JTextArea textArea;
+	private DataOutputStream dos;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ClienteUI frame = new ClienteUI();
+					frame.setVisible(true);
+					frame.escuchar();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ClienteUI() {
+		
+		try{
+			socket = new Socket("localhost",1555);
+			dos = new DataOutputStream(socket.getOutputStream());
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Excepción fatal:",
+			        JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 504, 485);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					dos.writeUTF(usuario + ": " + tfMensaje.getText() );
+				}
+				catch(NullPointerException exc){
+					exc.printStackTrace();
+				}
+			}
+		});
+		btnEnviar.setBounds(389, 412, 89, 23);
+		contentPane.add(btnEnviar);
+		
+		textField = new JTextField();
+		textField.setBounds(10, 410, 369, 23);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(10, 11, 468, 390);
+		contentPane.add(textArea);
+	}
+	
+	public void escuchar(){
+       
+        try {
+        	 DataInputStream dis = null;
+             String mensaje;
+            dis = new DataInputStream(socket.getInputStream());
+            while (true) {
+            	mensaje = dis.readUTF();
+				textArea.append(mensaje + System.lineSeparator());
+            }
+            
+        } catch (Exception ex) {
+        	JOptionPane.showConfirmDialog( this, "Error en stream de entrada: " + ex.getMessage(),
+            		"ERROR", JOptionPane.ERROR_MESSAGE );
+            ex.printStackTrace();
+        }
+
+    }
+}
