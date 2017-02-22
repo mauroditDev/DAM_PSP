@@ -1,0 +1,47 @@
+package ftp_1;
+
+import org.apache.commons.net.ftp.*;
+
+public class Ftp_1 {
+
+	public static void main(String[] args){
+		
+		try{
+			
+			FTPClient cliente = new FTPClient();
+			String servidor = "ftp.rediris.es";
+			System.out.println ("Conecto con el servidor: "+servidor);
+			//conectamos cliente FTP al servidor FTP
+			cliente.connect(servidor);
+			//obtenemos la respuesta
+			System.out.println (cliente.getReplyString());
+			//código de respuesta
+			int respuesta = cliente.getReplyCode();
+			//comprobación del código
+			if (!FTPReply.isPositiveCompletion(respuesta)) {
+			System.out.println ("Conexion NO ESTABLECIDA: "+respuesta);
+			cliente.disconnect();
+			System.exit(0);
+			}
+			else{
+				cliente.user("anonymous");
+				FTPFile[] directorios = cliente.listDirectories();
+				for(int i = 0; i< directorios.length; i++){
+					FTPFile[] archivos = cliente.listFiles(directorios[i].toFormattedString());
+					System.out.println("### CONTENIDO DE "+directorios[i].getName()+":");
+					for( int j = 0 ; j < archivos.length ; j++ ){
+						if(!archivos[j].isDirectory())
+						System.out.println("--"+archivos[j].getName()+": "+archivos[j].getType()+" - "+archivos[j].getSize()+"bytes");
+					}
+				}
+			}
+			//aqui el resto del programa...
+			cliente.disconnect();
+			System.out.println ("Conexión FINALIZADA");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}
